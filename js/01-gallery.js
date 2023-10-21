@@ -14,8 +14,6 @@ const createGalleryElements = (galleryItems) => {
     })
 }
 
-
-
 const onGalleryClick = (event) => {
     event.preventDefault();
     const galleryImage = event.target;
@@ -24,10 +22,10 @@ const onGalleryClick = (event) => {
     const instance = basicLightbox.create(`
         <img src="${galleryImage.dataset.source}" width="800" height="600">
     `, {
-        onShow: (instance) => {
+        onShow: () => {
             window.addEventListener('keydown', onEscKeyDown);
         },
-        onClose: (instance) => {
+        onClose: () => {
             window.removeEventListener('keydown', onEscKeyDown);
         }
     });
