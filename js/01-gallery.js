@@ -14,6 +14,8 @@ const createGalleryElements = (galleryItems) => {
     })
 }
 
+
+
 const onGalleryClick = (event) => {
     event.preventDefault();
     const galleryImage = event.target;
@@ -21,7 +23,21 @@ const onGalleryClick = (event) => {
 
     const instance = basicLightbox.create(`
         <img src="${galleryImage.dataset.source}" width="800" height="600">
-    `)
+    `, {
+        onShow: (instance) => {
+            window.addEventListener('keydown', onEscKeyDown);
+        },
+        onClose: (instance) => {
+            window.removeEventListener('keydown', onEscKeyDown);
+        }
+    });
+
+    const onEscKeyDown = (event) => {
+        if (event.key === 'Escape') {
+            instance.close();
+        }
+    };
+    
     instance.show();
 }
 
